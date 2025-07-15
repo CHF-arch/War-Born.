@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://ci81jdjsjftsn"]
+
+[ext_resource type="Texture2D" uid="uid://cbgqrmbcdk0x7" path="res://NEOI_PAIXTES/enemy_1.png" id="1_mbxyh"]
+[ext_resource type="Script" uid="uid://ddmlk2kddmqtl" path="res://scripts/enemy_1.gd" id="1_pjquw"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pjquw"]
+radius = 41.7647
+height = 83.5294
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ln7f7"]
+radius = 57.0588
+height = 114.118
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+scale = Vector2(1.7, 1.7)
+collision_layer = 4
+collision_mask = 5
+script = ExtResource("1_pjquw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(216, -42)
+rotation = -1.5708
+texture = ExtResource("1_mbxyh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_pjquw")
+
+[node name="Muzzle" type="Marker2D" parent="."]
+position = Vector2(64.7059, 11.1765)
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0.588242, -3.8147e-06)
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-0.588242, 4.76837e-06)
+shape = SubResource("CapsuleShape2D_ln7f7")

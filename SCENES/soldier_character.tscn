@@ -1,0 +1,91 @@
+[gd_scene load_steps=7 format=3 uid="uid://bnwot7glcp2c0"]
+
+[ext_resource type="Script" uid="uid://d3vfninbxoaaj" path="res://scripts/soldier_character.gd" id="1_kdu6k"]
+[ext_resource type="Texture2D" uid="uid://byo2n5nv8qaqr" path="res://Top_Down_Survivor/main_chara.png" id="2_ebx12"]
+[ext_resource type="PackedScene" uid="uid://dqtijlj4m10xc" path="res://SCENES/heart.tscn" id="3_ituxq"]
+[ext_resource type="AudioStream" uid="uid://q6flymvpjts1" path="res://Gunshot-Sound-Effect-Single-Shot.mp3" id="4_e5n5d"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ebx12"]
+radius = 124.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ebx12"]
+radius = 172.0
+height = 372.0
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+texture_filter = 1
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_kdu6k")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(8, 3)
+rotation = -1.5708
+scale = Vector2(3.5, 3.5)
+texture = ExtResource("2_ebx12")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.4, 0.4)
+rotation_smoothing_enabled = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-36, 2)
+shape = SubResource("CircleShape2D_ebx12")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-36, 2)
+shape = SubResource("CapsuleShape2D_ebx12")
+
+[node name="health_bar" type="CanvasLayer" parent="."]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="health_bar"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="heart" type="TextureRect" parent="health_bar/HBoxContainer"]
+custom_minimum_size = Vector2(23, 0)
+layout_mode = 2
+
+[node name="Sprite2D" parent="health_bar/HBoxContainer/heart" instance=ExtResource("3_ituxq")]
+position = Vector2(46, 62)
+
+[node name="heart2" type="TextureRect" parent="health_bar/HBoxContainer"]
+custom_minimum_size = Vector2(23, 0)
+layout_mode = 2
+
+[node name="Sprite2D" parent="health_bar/HBoxContainer/heart2" instance=ExtResource("3_ituxq")]
+position = Vector2(107, 62)
+
+[node name="heart3" type="TextureRect" parent="health_bar/HBoxContainer"]
+custom_minimum_size = Vector2(23, 0)
+layout_mode = 2
+
+[node name="Sprite2D" parent="health_bar/HBoxContainer/heart3" instance=ExtResource("3_ituxq")]
+position = Vector2(167, 63)
+
+[node name="heart4" type="TextureRect" parent="health_bar/HBoxContainer"]
+custom_minimum_size = Vector2(23, 0)
+layout_mode = 2
+
+[node name="Sprite2D" parent="health_bar/HBoxContainer/heart4" instance=ExtResource("3_ituxq")]
+position = Vector2(228, 63)
+
+[node name="heart5" type="TextureRect" parent="health_bar/HBoxContainer"]
+custom_minimum_size = Vector2(23, 0)
+layout_mode = 2
+
+[node name="Sprite2D" parent="health_bar/HBoxContainer/heart5" instance=ExtResource("3_ituxq")]
+position = Vector2(292, 62)
+
+[node name="Shoot_audio" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("4_e5n5d")
+volume_db = -25.0
+max_polyphony = 16
+parameters/looping = false
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
